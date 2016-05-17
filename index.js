@@ -1,5 +1,3 @@
-let lottoLandResponse;
-
 const romanNumbers = { 1: 'I', 2: 'II', 3: 'III', 4: 'IV', 5: 'V', 6: 'VI', 7: 'VII', 8: 'VIII', 9: 'IX', 10: 'X', 11: 'XI', 12: 'XII' };
 
 function numberWithCommas(x) {
@@ -43,7 +41,7 @@ function init(response) {
     saveLottolandResponse(response);
     renderLottoland(response.last[0]);
     loadSelects(response);
-    addSelectsListeners();
+    addSelectsListeners(response);
 }
 
 function renderLottoland(data) {
@@ -88,29 +86,29 @@ function loadYearSelect(response) {
     });
 }
 
-function addSelectsListeners() {
-    addSelectDayListener();
-    addSelectYearListener();
+function addSelectsListeners(response) {
+    addSelectDayListener(response);
+    addSelectYearListener(response);
 }
 
-function addSelectDayListener() {
+function addSelectDayListener(response) {
     const daySelect = document.getElementById('day-select');
     daySelect.addEventListener('change', (event) => {
-        renderLottoland(getDataByNr(event.target.value));
+        renderLottoland(getDataByNr(event.target.value, response));
     });
 }
 
-function getDataByNr(nr) {
-    return lottoLandResponse.last.find((data) => {
+function getDataByNr(nr, response) {
+    return response.last.find((data) => {
         return data.nr == nr;
     });
 }
 
-function addSelectYearListener() {
+function addSelectYearListener(response) {
     const yearSelect = document.getElementById('year-select');
     const daySelect = document.getElementById('day-select');
     yearSelect.addEventListener('change', (event) => {
-        loadDaySelect(lottoLandResponse, event.target.value);
-        renderLottoland(getDataByNr(daySelect.value));
+        loadDaySelect(response, event.target.value);
+        renderLottoland(getDataByNr(daySelect.value, response));
     });
 }
