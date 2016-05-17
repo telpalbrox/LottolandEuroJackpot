@@ -15,7 +15,7 @@ function template(data) {
     return `
         ${data.numbers.map((number) => `<span class="number">${number}</span>`).join('')}
         ${data.euroNumbers.map((euroNumber) => `<span class="number euro">${euroNumber}</span>`).join('')}
-        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+        <table class="mdl-data-table mdl-shadow--2dp">
             ${data.odds.map((odd) => {
                 return `
                     <tr>
@@ -67,19 +67,30 @@ function transformLottolandResponse(data) {
 }
 
 function loadSelects(response) {
-    loadDaySelect(response);
-    // loadYearSelect();
+    loadDaySelect(response, response.last[0].date.year);
+    loadYearSelect(response);
 }
 
-function loadDaySelect(response) {
+function loadDaySelect(response, year) {
     const daySelect = document.getElementById('day-select');
-    response.last.map((data, index) => {
+    for(let i = 0; i < daySelect.options.length; i++) {
+        daySelect.options[i] = null;
+    }
+    _.groupBy(response.last, 'date.year')[year].forEach((data, index) => {
         daySelect.options[index] = new Option(`${data.date.day}/${data.date.month}/${data.date.year}`, data.nr);
+    });
+}
+
+function loadYearSelect(response) {
+    const yearSelect = document.getElementById('year-select');
+    Object.keys(_.groupBy(response.last, 'date.year')).reverse().forEach((year, index) => {
+        yearSelect.options[index] = new Option(year, year);
     });
 }
 
 function addSelectsListeners() {
     addSelectDayListener();
+    addSelectYearListener();
 }
 
 function addSelectDayListener() {
@@ -92,5 +103,14 @@ function addSelectDayListener() {
 function getDataByNr(nr) {
     return lottoLandResponse.last.find((data) => {
         return data.nr == nr;
+    });
+}
+
+function addSelectYearListener() {
+    const yearSelect = document.getElementById('year-select');
+    const daySelect = document.getElementById('day-select');
+    yearSelect.addEventListener('change', (event) => {
+        loadDaySelect(lottoLandResponse, event.target.value);
+        renderLottoland(getDataByNr(daySelect.value));
     });
 }
