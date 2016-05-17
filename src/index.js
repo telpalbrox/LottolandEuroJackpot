@@ -33,12 +33,7 @@ function template(data) {
     `;
 }
 
-function saveLottolandResponse(response) {
-    lottoLandResponse = response;
-}
-
 function init(response) {
-    saveLottolandResponse(response);
     renderLottoland(response.last[0]);
     loadSelects(response);
     addSelectsListeners(response);
