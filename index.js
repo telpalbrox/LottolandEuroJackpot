@@ -12,7 +12,6 @@ function numberWithCommas(x) {
 }
 
 function template(data) {
-    console.log(data);
     return `
         ${data.numbers.map((number) => `<span class="number">${number}</span>`).join('')}
         ${data.euroNumbers.map((euroNumber) => `<span class="number euro">${euroNumber}</span>`).join('')}
@@ -43,11 +42,13 @@ function saveLottolandResponse(response) {
 function init(response) {
     saveLottolandResponse(response);
     renderLottoland(response.last[0]);
+    loadSelects(response);
+    addSelectsListeners();
 }
 
 function renderLottoland(data) {
     const transformedData = transformLottolandResponse(data);
-    document.getElementById('table').innerHTML = template(transformedData);
+    document.getElementById('results').innerHTML = template(transformedData);
 }
 
 function transformLottolandResponse(data) {
@@ -63,4 +64,33 @@ function transformLottolandResponse(data) {
     }
     copiedData.odds = odds;
     return copiedData;
+}
+
+function loadSelects(response) {
+    loadDaySelect(response);
+    // loadYearSelect();
+}
+
+function loadDaySelect(response) {
+    const daySelect = document.getElementById('day-select');
+    response.last.map((data, index) => {
+        daySelect.options[index] = new Option(`${data.date.day}/${data.date.month}/${data.date.year}`, data.nr);
+    });
+}
+
+function addSelectsListeners() {
+    addSelectDayListener();
+}
+
+function addSelectDayListener() {
+    const daySelect = document.getElementById('day-select');
+    daySelect.addEventListener('change', (event) => {
+        renderLottoland(getDataByNr(event.target.value));
+    });
+}
+
+function getDataByNr(nr) {
+    return lottoLandResponse.last.find((data) => {
+        return data.nr == nr;
+    });
 }
