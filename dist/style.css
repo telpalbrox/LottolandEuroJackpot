@@ -13,3 +13,58 @@
 .number.euro {
     border-color: red;
 }
+
+.selectors {
+    float: right;
+}
+
+.numbers {
+    float: left;
+    margin-bottom: 20px;
+}
+
+.results-table {
+    width: 100%;
+}
+
+.lottoland-ribbon {
+    width: 100%;
+    height: 40vh;
+    background-image: linear-gradient(left, #a4cc25, #64a407);
+    background-image: -webkit-linear-gradient(left, #a4cc25, #64a407);
+    background-image: -moz-linear-gradient(left, #a4cc25, #64a407);
+    flex-shrink: 0;
+}
+
+.lottoland-main {
+    margin-top: -35vh;
+    flex-shrink: 0;
+}
+
+.lottoland-header .mdl-layout__header-row {
+    padding-left: 40px;
+}
+
+.lottoland-container {
+    max-width: 1600px;
+    width: calc(100% - 16px);
+    margin: 0 auto;
+}
+
+.lottoland-content {
+    border-radius: 2px;
+    padding: 56px;
+    margin-bottom: 80px;
+}
+
+.lottoland-layout.is-small-screen .lottoland-content {
+    padding: 40px 28px;
+}
+
+.lottoland-footer {
+    padding-left: 40px;
+}
+
+.lottoland-footer .mdl-mini-footer--link-list a {
+    font-size: 13px;
+}
