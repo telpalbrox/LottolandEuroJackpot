@@ -11,9 +11,11 @@ function numberWithCommas(x) {
 
 function template(data) {
     return `
-        ${data.numbers.map((number) => `<span class="number">${number}</span>`).join('')}
-        ${data.euroNumbers.map((euroNumber) => `<span class="number euro">${euroNumber}</span>`).join('')}
-        <table class="mdl-data-table mdl-shadow--2dp">
+        <div class="numbers">
+            ${data.numbers.map((number) => `<span class="number">${number}</span>`).join('')}
+            ${data.euroNumbers.map((euroNumber) => `<span class="number euro">${euroNumber}</span>`).join('')}
+        </div>
+        <table class="mdl-data-table mdl-shadow--2dp results-table">
             ${data.odds.map((odd) => {
                 return `
                     <tr>
@@ -42,6 +44,7 @@ function init(response) {
 function renderLottoland(data) {
     const transformedData = transformLottolandResponse(data);
     document.getElementById('results').innerHTML = template(transformedData);
+    document.getElementById('day').innerHTML = `${data.date.day}/${data.date.month}/${data.date.year}`;
 }
 
 function transformLottolandResponse(data) {
