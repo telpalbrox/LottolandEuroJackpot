@@ -18,10 +18,14 @@
     float: right;
 }
 
-@media (max-width: 494px) {
+@media (max-width: 504px) {
     .selectors {
-        float: left;
+        float: none;
         margin-bottom: 20px;
+    }
+
+    .numbers {
+        float: none;
     }
 }
 

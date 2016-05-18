@@ -40,6 +40,24 @@ module.exports = function(grunt) {
                     dest: 'dist'
                 }]
             }
+        },
+        cssmin: {
+            dist: {
+                files: {
+                    'dist/style.css': ['dist/style.css']
+                }
+            }
+        },
+        htmlmin: {
+            dist: {
+                options: {
+                    removeComments: true,
+                    collapseWhitespace: true
+                },
+                files: {
+                    'dist/index.html': ['dist/index.html']
+                }
+            }
         }
     });
 
@@ -47,9 +65,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-babel');
     
-    
-    grunt.registerTask('build', ['clean', 'copy', 'babel', 'uglify']);
+    grunt.registerTask('build', ['clean', 'copy', 'cssmin', 'htmlmin', 'babel', 'uglify']);
     grunt.registerTask('default', ['build']);
 };
