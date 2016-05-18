@@ -1,7 +1,7 @@
 const romanNumbers = { 1: 'I', 2: 'II', 3: 'III', 4: 'IV', 5: 'V', 6: 'VI', 7: 'VII', 8: 'VIII', 9: 'IX', 10: 'X', 11: 'XI', 12: 'XII' };
 
 function numberWithCommas(x) {
-    x = x.toFixed(2).toString();
+    x = (x/100).toFixed(2).toString();
     let pattern = /(-?\d+)(\d{3})/;
     while (pattern.test(x)) {
         x = x.replace(pattern, "$1,$2");
