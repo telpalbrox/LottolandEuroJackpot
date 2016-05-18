@@ -1,0 +1,29 @@
+{
+  "name": "lottoland-eurojackpot",
+  "version": "1.0.0",
+  "description": "Simple vanilla ES6/2015 client for [Lottoland EuroJackpot](https://www.lottoland.com/en/eurojackpot/results-winning-numbers)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/telpalbrox/LottolandEuroJackpot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/telpalbrox/LottolandEuroJackpot/issues"
+  },
+  "homepage": "https://github.com/telpalbrox/LottolandEuroJackpot#readme",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.9.0",
+    "grunt": "^1.0.1",
+    "grunt-babel": "^6.0.0",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-uglify": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0"
+  }
+}
